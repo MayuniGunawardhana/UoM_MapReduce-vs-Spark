@@ -1,1 +1,29 @@
+spark-shell
 
+var df=spark.read.format("csv").load("s3://airline-delay-uom-project/Input/DelayedFlights-updated.csv")
+
+df.createOrReplaceTempView("delay_flights")
+
+val startTime = System.currentTimeMillis()
+
+var result_df=spark.sql("SELECT _c1 AS YEAR, avg((_c25/_c15)*100) AS AVG_CARR_DEYL  FROM delay_flights WHERE _c1 BETWEEN 2003 and 2010  GROUP BY _c1 ORDER BY _c1").show()
+
+val endTime = System.currentTimeMillis()
+
+val executionTimeSeconds = (endTime - startTime) / 1000.0
+
+println("Query execution time: " + executionTimeSeconds + " seconds")
+
+
+
+
+
+var result_df=spark.sql("SELECT _c1 AS YEAR, avg((_c25/_c15)*100) AS AVG_CARR_DEYL  FROM delay_flights WHERE _c1 BETWEEN 2003 and 2010  GROUP BY _c1 ORDER BY _c1").show()
+
+var result_df=spark.sql("SELECT _c1 AS YEAR, avg((_c27/_c15)*100) AS AVG_NAS_DELY    FROM delay_flights WHERE _c1 BETWEEN 2003 and 2010  GROUP BY _c1 ORDER BY _c1").show()
+
+var result_df=spark.sql("SELECT _c1 AS YEAR, avg((_c26/_c15)*100) AS AVG_WETHER_DEYL  FROM delay_flights WHERE _c1 BETWEEN 2003 and 2010  GROUP BY _c1 ORDER BY _c1").show()
+
+var result_df=spark.sql("SELECT _c1 AS YEAR, avg((_c29/_c15)*100) AS AVG_LATEAIRCRAFT_DEYL  FROM delay_flights WHERE _c1 BETWEEN 2003 and 2010  GROUP BY _c1 ORDER BY _c1").show()
+
+var result_df=spark.sql("SELECT _c1 AS YEAR, avg((_c28/_c15)*100) AS AVG_SECURITY_DEYL  FROM delay_flights WHERE _c1 BETWEEN 2003 and 2010  GROUP BY _c1 ORDER BY _c1").show()
